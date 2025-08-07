@@ -12,7 +12,9 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
 
-  const { data, error, isLoading, isValidating } = useSWR("/api/tasks", fetcher)
+  const { data, error, isLoading, isValidating } = useSWR("/api/tasks", fetcher, {
+    refreshInterval: 300000, // 5 minutes in milliseconds
+  })
   if (error) return <div>Failed to load</div>
   if (isLoading) return <div>Loading...</div>
   return (
